@@ -1,0 +1,29 @@
+--Code run in Ads Data Hub
+
+--Time run over:
+
+--Start Date:
+--2018-11-05
+--End Date:
+--2019-04-24
+
+WITH impressions_table AS 
+(
+SELECT
+user_id,
+count(user_id) AS frequency
+FROM
+adh.cm_dt_impressions
+WHERE
+event.campaign_id IN (21947414) AND event.site_id
+IN (1043393)
+
+
+GROUP BY 1)
+
+SELECT 
+frequency, 
+COUNT(DISTINCT impressions_table.user_id) AS unique_campaign_users
+FROM
+impressions_table
+GROUP BY 1
